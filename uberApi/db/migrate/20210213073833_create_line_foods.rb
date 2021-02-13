@@ -4,7 +4,9 @@ class CreateLineFoods < ActiveRecord::Migration[6.0]
       t.references :food, null: false, foreign_key: true
       t.references :restaurant, null: false, foreign_key: true
       t.references :order, foreign_key: true
+      # 商品個数
       t.integer :count, null: false, default: 0
+      # 仮注文の有効フラグ
       t.boolean :active, null: false, default: false
 
       t.timestamps
