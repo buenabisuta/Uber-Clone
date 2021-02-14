@@ -23,10 +23,10 @@ RSpec.describe Api::V1::RestaurantsController, type: :controller do
 
       results.each_with_index do | result , i |
         index = i + 1
-        expect(results[i]['id']).to eq index
-        expect(results[i]['name']).to eq defaultName + index.to_s
-        expect(results[i]['fee']).to eq defaultFee * index
-        expect(results[i]['time_required']).to eq defaultTime * index
+        expect(result['id']).to eq index
+        expect(result['name']).to eq defaultName + index.to_s
+        expect(result['fee']).to eq defaultFee * index
+        expect(result['time_required']).to eq defaultTime * index
       end
       expect(results.count).to eq 2
     end
