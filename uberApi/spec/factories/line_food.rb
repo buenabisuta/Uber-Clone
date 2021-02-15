@@ -21,4 +21,12 @@ FactoryBot.define do
     count { 1 }
     active { true }
   end
+
+  factory :line_food4, class: LineFood do
+    id { 2 }
+    restaurant_id { 1 }
+    food_id { 2 }
+    count { 2 }
+    active { true }
+  end
 end
