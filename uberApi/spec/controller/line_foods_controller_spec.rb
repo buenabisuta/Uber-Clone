@@ -3,6 +3,49 @@ require "json"
 
 RSpec.describe Api::V1::LineFoodsController, type: :controller do
   
+  describe "indexの正常確認" do
+    before do
+      FactoryBot.create(:restaurant1)
+      FactoryBot.create(:food1)
+      FactoryBot.create(:food2)
+      FactoryBot.create(:line_food1)
+      FactoryBot.create(:line_food2)
+    end
+
+    it "indexの正常ステータスレスポンス" do
+      get :index
+      expect(response).to  have_http_status '200'
+    end
+
+    it "indexの仮注文レスポンスデータ取得" do
+      get :index
+
+      result = JSON.parse(response.body)
+      expect(result['line_foods_ids'][0]).to eq 1
+      expect(result['line_foods_ids'][1]).to eq 2
+      expect(result['restaurant']['id']).to eq 1
+      expect(result['restaurant']['name']).to eq 'レストラン1'
+      expect(result['restaurant']['fee']).to eq 100 
+      expect(result['restaurant']['time_required']).to eq 10
+      expect(result['count']).to eq 2
+      expect(result['amount']).to eq 201
+    end
+  end
+
+  describe "indexの仮注文データが存在しない場合の確認" do
+    it "indexの仮注文データが存在しない場合のステータスレスポンス" do
+      get :index
+      expect(response).to  have_http_status '204'
+    end
+
+    it "indexのの仮注文データが存在しない場合のレスポンスデータ取得" do
+      get :index
+
+      result = JSON.parse(response.body)
+      expect(result.size).to eq 0
+    end
+  end
+
   describe "create_初回作成確認" do
     before do
       FactoryBot.create(:restaurant1)

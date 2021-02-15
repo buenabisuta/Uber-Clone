@@ -8,7 +8,7 @@ FactoryBot.define do
   end
 
   factory :line_food2, class: LineFood do
-    id { 1 }
+    id { 2 }
     restaurant_id { 1 }
     food_id { 2 }
     count { 1 }
@@ -16,7 +16,7 @@ FactoryBot.define do
   end
 
   factory :line_food3, class: LineFood do
-    id { 1 }
+    id { 3 }
     restaurant_id { 1 }
     count { 1 }
     active { true }
